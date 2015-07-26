@@ -85,6 +85,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
      */
     private FragmentManager fragmentManager;
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
