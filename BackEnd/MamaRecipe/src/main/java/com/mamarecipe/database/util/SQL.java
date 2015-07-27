@@ -15,9 +15,17 @@ public class SQL {
     public static String INSERT_DIRECTION;
     public static String QUERYALL_USERS;
     public static String QUERY_RECIPE_BY_DISHID;
+    public static String QUERY_RECIPE_BY_CATEGORYID;
     public static String QUERY_IMAGE_BY_DISHID;
     public static String QUERY_INGREDIENTS_BY_DISHID;
     public static String QUERY_DIRECTIONS_BY_DISHID;
+    public static String UPDATE_USER;
+    public static String UPDATE_RECIPE;
+    public static String UPDATE_IMAGE;
+    public static String UPDATE_INGREDIENT;
+    public static String UPDATE_DIRECTION;
+    public static String QUERY_USER_BY_USERID;
+    public static String QUERY_USER_BY_USERNAME;
     static{
         FileIO fileIO = new FileIO();
         Properties p = fileIO.readPropertiesFile("mamarecipe_op_sql.properties");
@@ -31,5 +39,13 @@ public class SQL {
         QUERY_IMAGE_BY_DISHID = p.getProperty("QUERY_IMAGE_BY_DISHID");
         QUERY_INGREDIENTS_BY_DISHID = p.getProperty("QUERY_INGREDIENTS_BY_DISHID");
         QUERY_DIRECTIONS_BY_DISHID = p.getProperty("QUERY_DIRECTIONS_BY_DISHID");
+        QUERY_RECIPE_BY_CATEGORYID = p.getProperty("QUERY_RECIPE_BY_CATEGORYID");
+        UPDATE_USER = p.getProperty("UPDATE_USER");
+        UPDATE_RECIPE = p.getProperty("UPDATE_RECIPE");
+        UPDATE_IMAGE = p.getProperty("UPDATE_IMAGE");
+        UPDATE_INGREDIENT = p.getProperty("UPDATE_INGREDIENT");
+        UPDATE_DIRECTION = p.getProperty("UPDATE_DIRECTION");
+        QUERY_USER_BY_USERID = p.getProperty("QUERY_USER_BY_USERID");
+        QUERY_USER_BY_USERNAME = p.getProperty("QUERY_USER_BY_USERNAME");
     }
 }
