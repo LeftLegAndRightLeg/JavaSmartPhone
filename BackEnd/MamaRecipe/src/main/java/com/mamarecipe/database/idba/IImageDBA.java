@@ -10,6 +10,5 @@ import java.util.List;
 public interface IImageDBA {
     void add(ImagePO imagePO);
     void update(ImagePO imagePO);
-    List<ImagePO> getByRecipeID(long recipeID);
-    ImagePO getByImageID(long imageID);
+    ImagePO getByRecipeID(long recipeID);
 }

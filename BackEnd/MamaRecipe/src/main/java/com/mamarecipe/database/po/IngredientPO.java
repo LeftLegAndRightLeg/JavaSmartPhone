@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 public class IngredientPO {
     private long ingreID;
     private String ingreName;
-    private long ingreQt;
+    private int ingreQt;
     private long dishID;
 
     public long getIngreID() {
@@ -27,11 +27,11 @@ public class IngredientPO {
         this.ingreName = ingreName;
     }
 
-    public long getIngreQt() {
+    public int getIngreQt() {
         return ingreQt;
     }
 
-    public void setIngreQt(long ingreQt) {
+    public void setIngreQt(int ingreQt) {
         this.ingreQt = ingreQt;
     }
 

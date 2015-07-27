@@ -26,6 +26,7 @@ public class SQL {
     public static String UPDATE_DIRECTION;
     public static String QUERY_USER_BY_USERID;
     public static String QUERY_USER_BY_USERNAME;
+    public static String QUERY_RECIPE_BY_USERID;
     static{
         FileIO fileIO = new FileIO();
         Properties p = fileIO.readPropertiesFile("mamarecipe_op_sql.properties");
@@ -47,5 +48,6 @@ public class SQL {
         UPDATE_DIRECTION = p.getProperty("UPDATE_DIRECTION");
         QUERY_USER_BY_USERID = p.getProperty("QUERY_USER_BY_USERID");
         QUERY_USER_BY_USERNAME = p.getProperty("QUERY_USER_BY_USERNAME");
+        QUERY_RECIPE_BY_USERID = p.getProperty("QUERY_RECIPE_BY_USERID");
     }
 }

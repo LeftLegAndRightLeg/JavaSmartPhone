@@ -10,6 +10,5 @@ import java.util.List;
 public interface IDirectionDBA {
     void add(DirectionPO directionPO);
     void update(DirectionPO directionPO);
-    List<DirectionPO> getByRecipeID(long recipeID);
-    DirectionPO getByDirectionID(long directionID);
+    DirectionPO getByRecipeID(long recipeID);
 }
