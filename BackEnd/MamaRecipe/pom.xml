@@ -62,9 +62,31 @@
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-moxy</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.restfuse</groupId>
+            <artifactId>com.eclipsesource.restfuse</artifactId>
+            <version>${restfuse.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
     <properties>
         <jersey.version>2.19</jersey.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <restfuse.version>1.2.0</restfuse.version>
+        <gson.version>2.2.4</gson.version>
     </properties>
 </project>
