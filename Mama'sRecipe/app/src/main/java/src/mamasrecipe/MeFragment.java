@@ -7,7 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import app.App;
+import model.po.UserPO;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import src.mamasrecipe.R;
 
 //package src.mamasrecipe;
@@ -126,6 +132,21 @@ public class MeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View meLayout = inflater.inflate(R.layout.fragment_me, container, false);
+        UserPO upo = new UserPO();
+        upo.setUserName("test");
+        App.getRestClient().getUserService().login(upo, new Callback<UserPO>() {
+            @Override
+            public void success(UserPO userPO, Response response) {
+                TextView tv = (TextView) getActivity().findViewById(R.id.userName);
+                tv.setText(userPO.getUserID() + userPO.getUserName() + userPO.getUserPass());
+                tv.invalidate();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
         return meLayout;
     }
 

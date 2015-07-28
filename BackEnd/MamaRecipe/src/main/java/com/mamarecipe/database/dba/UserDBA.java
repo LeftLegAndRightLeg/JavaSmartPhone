@@ -20,6 +20,7 @@ public class UserDBA implements IUserDBA {
         ){
             stmt.setString(1, userPO.getUserName());
             stmt.setString(2, userPO.getUserPass());
+            stmt.setString(3, userPO.getIpAddress());
             int row = stmt.executeUpdate();
             ServerTrace.log(this.getClass().toString(), "SQL", stmt.toString()+ " " + row + "rows inserted");
         }catch(Exception e){
@@ -32,7 +33,8 @@ public class UserDBA implements IUserDBA {
         ){
             stmt.setString(1, userPO.getUserName());
             stmt.setString(2, userPO.getUserPass());
-            stmt.setLong(3, userPO.getUserID());
+            stmt.setString(3, userPO.getIpAddress());
+            stmt.setLong(4, userPO.getUserID());
             int row = stmt.executeUpdate();
             ServerTrace.log(this.getClass().toString(), "SQL", stmt.toString()+ " " + row + "rows updated");
         }catch(Exception e){
@@ -50,6 +52,7 @@ public class UserDBA implements IUserDBA {
                     po.setUserID(rs.getLong(1));
                     po.setUserName(rs.getString(2));
                     po.setUserPass(rs.getString(3));
+                    po.setIpAddress(rs.getString(4));
                     ServerTrace.log(this.getClass().toString(), "SQL", stmt.toString());
                     return po;
                 }
@@ -72,6 +75,7 @@ public class UserDBA implements IUserDBA {
                     po.setUserID(rs.getLong(1));
                     po.setUserName(rs.getString(2));
                     po.setUserPass(rs.getString(3));
+                    po.setIpAddress(rs.getString(4));
                     ServerTrace.log(this.getClass().toString(), "SQL", stmt.toString());
                     return po;
                 }

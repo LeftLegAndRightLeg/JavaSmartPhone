@@ -9,12 +9,13 @@ import java.sql.SQLException;
  */
 public class DBUtil {
     private DBUtil() {}
-    public static final Connection getConnection() throws SQLException{
+    public static final Connection getConnection() throws SQLException, ClassNotFoundException {
         System.setProperty("jdbc.drivers", "com.mysql.jdbc.Driver");
         String url = "jdbc:mysql://jdbcjavasp.cq6tvjnzkrnl.us-west-1.rds.amazonaws.com:3306";
         String username = "BobIsAwesome";
         String password = "YesHeIsAwesome";
         String db = "mamarecipe";
+        Class.forName("com.mysql.jdbc.Driver");
         return DriverManager.getConnection(url + "/" + db, username, password);
     }
 }
