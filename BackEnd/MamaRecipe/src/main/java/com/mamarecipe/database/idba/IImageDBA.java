@@ -1,8 +1,6 @@
 package com.mamarecipe.database.idba;
 
-import com.mamarecipe.database.po.ImagePO;
-
-import java.util.List;
+import com.mamarecipe.model.ImagePO;
 
 /**
  * Created by Jeremiah on 7/26/15.

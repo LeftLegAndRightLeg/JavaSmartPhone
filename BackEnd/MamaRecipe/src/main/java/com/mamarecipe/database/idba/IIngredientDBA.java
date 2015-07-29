@@ -1,6 +1,6 @@
 package com.mamarecipe.database.idba;
 
-import com.mamarecipe.database.po.IngredientPO;
+import com.mamarecipe.model.IngredientPO;
 
 import java.util.List;
 

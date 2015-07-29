@@ -1,14 +1,12 @@
 package com.mamarecipe.database.dba;
 
 import com.mamarecipe.database.idba.IRecipeDBA;
-import com.mamarecipe.database.po.RecipePO;
+import com.mamarecipe.model.RecipePO;
 import com.mamarecipe.database.util.DBUtil;
 import com.mamarecipe.database.util.SQL;
 import com.mamarecipe.util.ServerTrace;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,19 +15,28 @@ import java.util.List;
  */
 public class RecipeDBA implements IRecipeDBA {
     @Override
-    public void add(RecipePO recipePO){
+    public long add(RecipePO recipePO){
         try(Connection conn = DBUtil.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(SQL.INSERT_RECIPE)){
+            PreparedStatement stmt = conn.prepareStatement(SQL.INSERT_RECIPE, Statement.RETURN_GENERATED_KEYS)){
             stmt.setString(1, recipePO.getDishName());
             stmt.setLong(2, recipePO.getCategoryID());
-            stmt.setLong(3, recipePO.getDishID());
+            stmt.setLong(3, recipePO.getUserID());
             stmt.setString(4, recipePO.getCookingTime());
             stmt.setString(5, recipePO.getOther());
             int row = stmt.executeUpdate();
             ServerTrace.log(this.getClass().toString(), "SQL", stmt.toString()+" "+row+" rows inserted.");
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getLong(1);
+                }
+                else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                }
+            }
         }catch(Exception e){
             e.printStackTrace();
         }
+        return -1;
     }
     @Override
     public void update(RecipePO recipePO){

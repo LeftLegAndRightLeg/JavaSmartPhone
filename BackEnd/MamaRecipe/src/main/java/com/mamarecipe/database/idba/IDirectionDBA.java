@@ -1,8 +1,6 @@
 package com.mamarecipe.database.idba;
 
-import com.mamarecipe.database.po.DirectionPO;
-
-import java.util.List;
+import com.mamarecipe.model.DirectionPO;
 
 /**
  * Created by Jeremiah on 7/26/15.

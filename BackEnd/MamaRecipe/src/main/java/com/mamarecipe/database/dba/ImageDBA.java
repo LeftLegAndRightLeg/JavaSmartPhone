@@ -1,7 +1,7 @@
 package com.mamarecipe.database.dba;
 
 import com.mamarecipe.database.idba.IImageDBA;
-import com.mamarecipe.database.po.ImagePO;
+import com.mamarecipe.model.ImagePO;
 import com.mamarecipe.database.util.DBUtil;
 import com.mamarecipe.database.util.SQL;
 import com.mamarecipe.util.ServerTrace;

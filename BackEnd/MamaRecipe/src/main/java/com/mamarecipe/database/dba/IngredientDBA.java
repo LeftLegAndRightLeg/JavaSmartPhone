@@ -1,7 +1,7 @@
 package com.mamarecipe.database.dba;
 
 import com.mamarecipe.database.idba.IIngredientDBA;
-import com.mamarecipe.database.po.IngredientPO;
+import com.mamarecipe.model.IngredientPO;
 import com.mamarecipe.database.util.DBUtil;
 import com.mamarecipe.database.util.SQL;
 import com.mamarecipe.util.ServerTrace;

@@ -2,7 +2,7 @@ package com.mamarecipe.webapi;
 
 import com.mamarecipe.database.dba.UserDBA;
 import com.mamarecipe.database.idba.IUserDBA;
-import com.mamarecipe.database.po.UserPO;
+import com.mamarecipe.model.UserPO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -24,21 +24,29 @@ public class UserService {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("/signup")
-    public String addUser(UserPO user) {
+    public Response signUp(UserPO user) {
         //TODO: check duplicated user name
         IUserDBA userDBA = new UserDBA();
-        userDBA.add(user);
-        return "OK";
+        long userID = userDBA.add(user);
+        user.setUserID(userID);
+        if(userID>=0)
+            return Response.ok(user).build();
+        else
+            return Response.status(Response.Status.NOT_ACCEPTABLE).build();
     }
     @POST
+    @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("/login")
-    public UserPO login(UserPO user) {
+    public Response login(UserPO user) {
         IUserDBA userDBA = new UserDBA();
         UserPO upo = userDBA.findByName(user.getUserName());
         if(upo!=null)
-            return upo;
+            return Response.status(Response.Status.NOT_FOUND).build();
+        //TODO: make authentication more robust
+        if(upo.getUserPass().equals(user.getUserPass()))
+            return Response.ok(upo).build();
         else
-            return new UserPO();
+            return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 }

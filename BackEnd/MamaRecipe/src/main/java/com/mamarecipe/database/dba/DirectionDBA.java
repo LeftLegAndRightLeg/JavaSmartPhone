@@ -1,8 +1,7 @@
 package com.mamarecipe.database.dba;
 
 import com.mamarecipe.database.idba.IDirectionDBA;
-import com.mamarecipe.database.po.DirectionPO;
-import com.mamarecipe.database.po.ImagePO;
+import com.mamarecipe.model.DirectionPO;
 import com.mamarecipe.database.util.DBUtil;
 import com.mamarecipe.database.util.SQL;
 import com.mamarecipe.util.ServerTrace;
@@ -10,7 +9,6 @@ import com.mamarecipe.util.ServerTrace;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.List;
 
 /**
  * Created by Jeremiah on 7/27/15.
