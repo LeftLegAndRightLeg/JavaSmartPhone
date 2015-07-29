@@ -134,6 +134,7 @@ public class MeFragment extends Fragment {
         View meLayout = inflater.inflate(R.layout.fragment_me, container, false);
         UserPO upo = new UserPO();
         upo.setUserName("test");
+        upo.setUserPass("testpass");
         App.getRestClient().getUserService().login(upo, new Callback<UserPO>() {
             @Override
             public void success(UserPO userPO, Response response) {

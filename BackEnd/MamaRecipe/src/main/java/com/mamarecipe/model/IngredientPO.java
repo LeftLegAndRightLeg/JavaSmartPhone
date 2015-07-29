@@ -2,9 +2,12 @@ package com.mamarecipe.model;
 
 import com.google.gson.Gson;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created by Jeremiah on 7/26/15.
  */
+@XmlRootElement
 public class IngredientPO {
     private long ingreID;
     private String ingreName;

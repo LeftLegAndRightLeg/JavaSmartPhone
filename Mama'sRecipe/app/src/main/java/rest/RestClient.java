@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import rest.service.PhotoService;
 import rest.service.UserService;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
@@ -14,6 +15,7 @@ public class RestClient
 {
     private static final String BASE_URL = "http://52.8.250.104:8080/MamaRecipe/webapi/";
     private UserService userService;
+    private PhotoService photoService;
 
     public RestClient()
     {
@@ -28,10 +30,13 @@ public class RestClient
                 .build();
 
         userService = restAdapter.create(UserService.class);
+        photoService = restAdapter.create(PhotoService.class);
     }
 
-    public UserService getUserService()
-    {
+    public UserService getUserService(){
         return userService;
+    }
+    public PhotoService getPhotoService(){
+        return photoService;
     }
 }

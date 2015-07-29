@@ -45,12 +45,14 @@ public class ImageDBA implements IImageDBA{
         try(Connection conn = DBUtil.getConnection();
             PreparedStatement stmt = conn.prepareStatement(SQL.QUERY_IMAGE_BY_DISHID)){
             stmt.setLong(1, recipeID);
+            ServerTrace.log(this.getClass().toString(), "SQL", stmt.toString());
             try(ResultSet rs = stmt.executeQuery()){
                 if(rs.next()){
                     ImagePO ipo = new ImagePO();
                     ipo.setImageID(rs.getLong(1));
                     ipo.setImageURI(rs.getString(2));
                     ipo.setDishID(rs.getLong(3));
+                    return ipo;
                 }
             }catch(Exception e){
                 e.printStackTrace();

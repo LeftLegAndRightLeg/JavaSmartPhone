@@ -53,13 +53,6 @@ public class RecipeService {
         IRecipeDBA recipeDBA = new RecipeDBA();
         List<RecipePO> rpoList = recipeDBA.getByCategoryID(Long.parseLong(CategoryID));
         return rpoList;
-/*
-        if(rpoList!=null){
-            return Response.ok(rpoList).build();
-        }else{
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-*/
     }
     @GET
     @Produces({ MediaType.APPLICATION_JSON })

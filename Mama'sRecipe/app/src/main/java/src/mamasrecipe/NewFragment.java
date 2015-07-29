@@ -2,12 +2,28 @@ package src.mamasrecipe;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import app.App;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.TypedFile;
 import src.mamasrecipe.R;
 
 //package src.mamasrecipe;
@@ -126,7 +142,47 @@ public class NewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View newLayout = inflater.inflate(R.layout.fragment_new, container, false);
+        InputStream inputStream = getActivity().getResources().openRawResource(R.raw.pass);
+        File file = new File(getActivity().getFilesDir(), "pass.png");
+        try {
+            writeBytesToFile(inputStream, file);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        TypedFile typedFile = new TypedFile("multipart/form-data", file);
+        String dishID = "2";
+        App.getRestClient().getPhotoService().upload(typedFile, dishID,
+                new Callback<String>(){
+                    @Override
+                    public void success(String s, Response response) {
+                        Log.e("Upload", "Success");
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Log.e("Upload", "Fail");
+                    }
+
+                });
         return newLayout;
     }
-
+    public void writeBytesToFile(InputStream is, File file) throws IOException {
+        FileOutputStream fos = null;
+        try {
+            byte[] data = new byte[2048];
+            int nbread = 0;
+            fos = new FileOutputStream(file);
+            while((nbread=is.read(data))>-1){
+                fos.write(data,0,nbread);
+            }
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            if (fos!=null){
+                fos.close();
+            }
+        }
+    }
 }

@@ -41,7 +41,7 @@ public class UserService {
     public Response login(UserPO user) {
         IUserDBA userDBA = new UserDBA();
         UserPO upo = userDBA.findByName(user.getUserName());
-        if(upo!=null)
+        if(upo==null)
             return Response.status(Response.Status.NOT_FOUND).build();
         //TODO: make authentication more robust
         if(upo.getUserPass().equals(user.getUserPass()))
