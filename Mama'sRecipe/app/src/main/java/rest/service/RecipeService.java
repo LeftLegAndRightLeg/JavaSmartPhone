@@ -17,9 +17,9 @@ public interface RecipeService {
     @POST("/recipe/add")
     void addRecipe(@Body RecipePO recipePO, Callback<String> cb);
     @GET("/recipe/dishid/{dishid}")
-    RecipePO getRecipeByDishID(@Path("dishid")String dishID);
+    void getRecipeByDishID(@Path("dishid")String dishID, RecipePO cb);
     @GET("/recipe/categoryid/{CategoryID}")
-    List<RecipePO> getRecipesByCategoryID(@Path("CategoryID")String CategoryID);
+    void getRecipesByCategoryID(@Path("CategoryID")String CategoryID, List<RecipePO> cb);
     @GET("/recipe/userid/{userID}")
-    List<RecipePO> getRecipesByUserID(@Path("userID")String userID);
+    void getRecipesByUserID(@Path("userID")String userID, Callback<List<RecipePO>> cb);
 }

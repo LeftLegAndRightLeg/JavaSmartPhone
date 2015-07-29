@@ -21,5 +21,5 @@ public interface PhotoService {
                 @Part("dishID") String dishID,
                 Callback<String> cb);
     @GET("/image/dishID/{dishID}")
-    ImagePO getImageByDishID(@Path("dishID")String dishID);
+    void getImageByDishID(@Path("dishID")String dishID, Callback<ImagePO> cb);
 }

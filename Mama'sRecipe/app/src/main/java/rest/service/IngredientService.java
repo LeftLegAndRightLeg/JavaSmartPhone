@@ -19,5 +19,5 @@ public interface IngredientService {
     @POST("/ingre/addmore")
     void addRecipe(@Body List<IngredientPO> ingrePOList, Callback<String> cb);
     @GET("/ingre/dishID/{dishID}")
-    List<IngredientPO> getIngreByDishID(@Path("dishID")String dishID);
+    void getIngreByDishID(@Path("dishID")String dishID, Callback<List<IngredientPO>> cb);
 }

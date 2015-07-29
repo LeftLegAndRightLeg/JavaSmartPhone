@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.po.DirectionPO;
 import model.po.IngredientPO;
+import model.po.RecipePO;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -17,5 +18,5 @@ public interface DirectionService {
     @POST("/direction/addone")
     void addRecipe(@Body DirectionPO directPO, Callback<String> cb);
     @GET("/direction/dishID/{dishID}")
-    List<DirectionPO> getDirectByDishID(@Path("dishID") String dishID);
+    void getDirectByDishID(@Path("dishID") String dishID, Callback<List<RecipePO>> cb);
 }
