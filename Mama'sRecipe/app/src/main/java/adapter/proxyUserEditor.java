@@ -7,7 +7,7 @@ import model.*;
 /**
  * Created by gongbailiang on 7/26/15.
  */
-public class proxyUserEditor {
+public abstract class proxyUserEditor {
     EditUserTable editusrtb;
 
     public void updateUser(String name, String newpw, Context context) {

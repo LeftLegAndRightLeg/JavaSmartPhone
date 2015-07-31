@@ -11,8 +11,6 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import src.mamasrecipe.*;
-
 /**
  * 项目的主Activity，所有的Fragment都嵌入在这里。
  *

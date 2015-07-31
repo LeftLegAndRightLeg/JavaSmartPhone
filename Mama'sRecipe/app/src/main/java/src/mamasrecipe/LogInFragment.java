@@ -1,23 +1,73 @@
 package src.mamasrecipe;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import app.App;
+import model.po.UserPO;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class LogInFragment extends Fragment {
+    private EditText accountLogInEditText;
+    private EditText pwLogInEditText;
+    private Button logInSubmitButton;
 
+    private String userName;
+    private String passWord;
     public LogInFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_log_in, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_log_in, container, false);
+        getReference(view);
+
+        logInSubmitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                getInputs();
+                UserPO upo = new UserPO();
+                upo.setUserName(userName);
+                upo.setUserPass(passWord);
+                App.getRestClient().getUserService().login(upo, new Callback<UserPO>(){
+                    @Override
+                    public void success(UserPO userPO, Response response) {
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                });
+            }
+        });
+
+        return view;
+
+    }
+    public void getReference(View view){
+        accountLogInEditText = (EditText) view.findViewById(R.id.accountLogInEditText);
+        pwLogInEditText = (EditText) view.findViewById(R.id.pwLogInEditText);
+        logInSubmitButton = (Button) view.findViewById(R.id.logInSubmitButton);
+    }
+    public void getInputs(){
+        userName = accountLogInEditText.getText().toString();
+        passWord = pwLogInEditText.getText().toString();
     }
 }
