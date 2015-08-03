@@ -9,6 +9,8 @@ import com.mamarecipe.util.ServerTrace;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Jeremiah on 7/27/15.
@@ -41,18 +43,20 @@ public class DirectionDBA implements IDirectionDBA {
     }
 
     @Override
-    public DirectionPO getByRecipeID(long recipeID) {
+    public List<DirectionPO> getByRecipeID(long recipeID) {
         try(Connection conn = DBUtil.getConnection();
             PreparedStatement stmt = conn.prepareStatement(SQL.QUERY_DIRECTIONS_BY_DISHID)){
             stmt.setLong(1, recipeID);
             try(ResultSet rs = stmt.executeQuery()){
-                if(rs.next()){
+                List<DirectionPO> dlist = new LinkedList<>();
+                while(rs.next()){
                     DirectionPO dpo = new DirectionPO();
                     dpo.setDirectionID(rs.getLong(1));
                     dpo.setDirectionName(rs.getString(2));
                     dpo.setDishID(rs.getLong(3));
-                    return dpo;
+                    dlist.add(dpo);
                 }
+                return dlist;
             }catch(Exception e){
                 e.printStackTrace();
             }
