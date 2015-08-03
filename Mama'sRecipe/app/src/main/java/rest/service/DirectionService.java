@@ -18,5 +18,5 @@ public interface DirectionService {
     @POST("/direction/addone")
     void addRecipe(@Body DirectionPO directPO, Callback<String> cb);
     @GET("/direction/dishID/{dishID}")
-    void getDirectByDishID(@Path("dishID") String dishID, Callback<List<RecipePO>> cb);
+    void getDirectByDishID(@Path("dishID") String dishID, Callback<List<DirectionPO>> cb);
 }

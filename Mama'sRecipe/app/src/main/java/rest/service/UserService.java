@@ -10,7 +10,7 @@ import retrofit.http.POST;
  */
 public interface UserService {
     @POST("/user/signup")
-    void signUp(@Body UserPO userPO, Callback<String> cb);
+    void signUp(@Body UserPO userPO, Callback<UserPO> cb);
     @POST("/user/login")
     void login(@Body UserPO userPO, Callback<UserPO> cb);
 }

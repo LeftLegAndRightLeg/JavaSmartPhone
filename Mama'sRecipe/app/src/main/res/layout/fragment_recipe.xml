@@ -24,13 +24,13 @@
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:weightSum="1">
-            <!--<ImageView-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/imageView2"-->
-                <!--android:src="@drawable/mexicanfood"-->
-                <!--android:scaleType="fitCenter"-->
-                <!--android:minHeight="@android:dimen/thumbnail_height" />-->
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/testImageView"
+                android:scaleType="fitCenter"
+                android:minHeight="@android:dimen/thumbnail_height"
+                android:src="@drawable/ic_launcher"/>
 
             <!--<ImageView-->
                 <!--android:layout_width="fill_parent"-->

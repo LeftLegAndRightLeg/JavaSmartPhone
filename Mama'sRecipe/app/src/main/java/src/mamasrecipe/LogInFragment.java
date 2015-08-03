@@ -1,7 +1,9 @@
-package src.mamasrecipe;
 
+package src.mamasrecipe;
+import android.annotation.TargetApi;
+import android.app.Fragment;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,19 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import app.App;
 import model.po.UserPO;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-
-
-/**
- * A placeholder fragment containing a simple view.
- */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class LogInFragment extends Fragment {
+
     private EditText accountLogInEditText;
     private EditText pwLogInEditText;
     private Button logInSubmitButton;
@@ -47,12 +45,15 @@ public class LogInFragment extends Fragment {
                 App.getRestClient().getUserService().login(upo, new Callback<UserPO>(){
                     @Override
                     public void success(UserPO userPO, Response response) {
-
+                        Intent submit = new Intent(getActivity(), MainActivity.class);
+                        startActivity(submit);
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
-
+                        System.out.println("----------- Log In Failure ----------");
+                        Intent submit = new Intent(getActivity(), MainActivity.class);
+                        startActivity(submit);
                     }
                 });
             }

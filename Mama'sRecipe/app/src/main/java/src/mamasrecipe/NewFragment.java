@@ -2,178 +2,83 @@ package src.mamasrecipe;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import app.App;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedFile;
-import src.mamasrecipe.R;
 
-//package src.mamasrecipe;
-//
-//import android.app.Activity;
-//import android.net.Uri;
-//import android.os.Bundle;
-//import android.support.v4.app.Fragment;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//
-//
-///**
-// * A simple {@link Fragment} subclass.
-// * Activities that contain this fragment must implement the
-// * {@link NewFragment.OnFragmentInteractionListener} interface
-// * to handle interaction events.
-// * Use the {@link NewFragment#newInstance} factory method to
-// * create an instance of this fragment.
-// */
-//public class NewFragment extends Fragment {
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
-//
-//    private OnFragmentInteractionListener mListener;
-//
-//    /**
-//     * Use this factory method to create a new instance of
-//     * this fragment using the provided parameters.
-//     *
-//     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
-//     * @return A new instance of fragment NewFragment.
-//     */
-//    // TODO: Rename and change types and number of parameters
-//    public static NewFragment newInstance(String param1, String param2) {
-//        NewFragment fragment = new NewFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-//
-//    public NewFragment() {
-//        // Required empty public constructor
-//    }
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//    }
-//
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View newLayout = inflater.inflate(R.layout.fragment_new,
-//                container, false);
-//        return newLayout;
-//    }
-//
-//    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-//
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        try {
-//            mListener = (OnFragmentInteractionListener) activity;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-//
-//    /**
-//     * This interface must be implemented by activities that contain this
-//     * fragment to allow an interaction in this fragment to be communicated
-//     * to the activity and potentially other fragments contained in that
-//     * activity.
-//     * <p/>
-//     * See the Android Training lesson <a href=
-//     * "http://developer.android.com/training/basics/fragments/communicating.html"
-//     * >Communicating with Other Fragments</a> for more information.
-//     */
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        public void onFragmentInteraction(Uri uri);
-//    }
-//
-//}
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class NewFragment extends Fragment {
+
+
+    private EditText recipeNameToServer;
+    private ImageView photoToServer;
+    private EditText newfirst0TextView;
+    private EditText newfirst1TextView;
+    private EditText newsecond0TextView;
+    private EditText newsecond1TextView;
+    private EditText newthird0TextView;
+    private EditText newthird1TextView;
+
+    private EditText direction0TextView;
+    private EditText direction1TextView;
+    private EditText direction2TextView;
+    private EditText direction3TextView;
+
+    private Button newSubmitButton;
+    private byte[] image;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View newLayout = inflater.inflate(R.layout.fragment_new, container, false);
-        InputStream inputStream = getActivity().getResources().openRawResource(R.raw.pass);
-        File file = new File(getActivity().getFilesDir(), "pass.png");
-        try {
-            writeBytesToFile(inputStream, file);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        TypedFile typedFile = new TypedFile("multipart/form-data", file);
-        String dishID = "2";
-        App.getRestClient().getPhotoService().upload(typedFile, dishID,
-                new Callback<String>(){
-                    @Override
-                    public void success(String s, Response response) {
-                        Log.e("Upload", "Success");
-                    }
+        getReference(newLayout);
+        getImageFromCamera();
 
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Log.e("Upload", "Fail");
-                    }
+        newSubmitButton.setOnClickListener(new View.OnClickListener(){
 
-                });
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MyDishActivity.class);
+                startActivity(intent);
+            }
+        });
         return newLayout;
     }
     public void writeBytesToFile(InputStream is, File file) throws IOException {
         FileOutputStream fos = null;
         try {
-            byte[] data = new byte[2048];
+            //byte[] data = new byte[2048];
             int nbread = 0;
             fos = new FileOutputStream(file);
-            while((nbread=is.read(data))>-1){
-                fos.write(data,0,nbread);
+            while((nbread=is.read(image))>-1){
+                fos.write(image,0,nbread);
             }
         }
         catch (Exception ex) {
@@ -184,5 +89,120 @@ public class NewFragment extends Fragment {
                 fos.close();
             }
         }
+    }
+
+
+    private void getImageFromCamera(){
+        photoToServer.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                openCamera();
+
+            }
+        });
+    }
+
+    //Take photos
+    public void openCamera(){
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 0);
+    }
+    //Get photos
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Bitmap bp = (Bitmap) data.getExtras().get("data");
+        displayImage(bp);
+    }
+
+    //Set photos and display
+    public void displayImage(Bitmap bp){
+        ByteArrayOutputStream bos1 = new ByteArrayOutputStream();
+        bp.compress(Bitmap.CompressFormat.PNG, 100, bos1);
+//        FileOutputStream fos = null;
+//        try {
+//            fos = new FileOutputStream("image.png");
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            bos1.writeTo(fos);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        image = bos1.toByteArray();
+        photoToServer.setImageBitmap(bp);
+
+
+//        try {
+//            bos1.close();
+//            fos.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+//        FileOutputStream fos = null;
+//        try {
+//            fos = new FileOutputStream("image.png");
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            fos.write(image);
+//            fos.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("----------SAVE SUCCESS--------");
+
+
+//        InputStream inputStream = getActivity().getResources().openRawResource(R.raw.pass);
+//        File file = new File("pass.png");
+//
+//
+//        try {
+//            writeBytesToFile(inputStream, file);
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+//        TypedFile typedFile = new TypedFile("multipart/form-data", file);
+//        String dishID = "2";
+//        App.getRestClient().getPhotoService().upload(typedFile, dishID,
+//                new Callback<String>() {
+//                    @Override
+//                    public void success(String s, Response response) {
+//                        Log.e("Upload", "Success");
+//                    }
+//
+//                    @Override
+//                    public void failure(RetrofitError error) {
+//                        Log.e("Upload", "Fail");
+//                    }
+//
+//                });
+
+    }
+
+
+
+
+    private void getReference(View view){
+        recipeNameToServer = (EditText) view.findViewById(R.id.recipeNameToServer);
+        photoToServer = (ImageView) view.findViewById(R.id.photoToServer);
+
+        newfirst0TextView = (EditText) view.findViewById(R.id.newfirst0TextView);
+        newfirst1TextView = (EditText) view.findViewById(R.id.newfirst1TextView);
+        newsecond0TextView = (EditText) view.findViewById(R.id.newsecond0TextView);
+        newsecond1TextView = (EditText) view.findViewById(R.id.newsecond1TextView);
+        newthird0TextView = (EditText) view.findViewById(R.id.newthird0TextView);
+        newthird1TextView = (EditText) view.findViewById(R.id.newthird1TextView);
+        direction0TextView = (EditText) view.findViewById(R.id.direction0TextView);
+        direction1TextView = (EditText) view.findViewById(R.id.direction1TextView);
+        direction2TextView = (EditText) view.findViewById(R.id.direction2TextView);
+        direction3TextView = (EditText) view.findViewById(R.id.direction3TextView);
+        newSubmitButton = (Button) view.findViewById(R.id.newSubmitButton);
+
     }
 }
