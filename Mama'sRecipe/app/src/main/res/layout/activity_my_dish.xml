@@ -7,22 +7,82 @@
     tools:context="src.mamasrecipe.MyDishActivity">
 
     <ImageView
-        android:id="@+id/myDish1"
+        android:id="@+id/imageView1"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="0dp"
         android:layout_marginLeft="0dp"
-        android:src="@drawable/mydish"/>
+        android:src="@drawable/ic_launcher"/>
 
     <TextView
-        android:id="@+id/myDishName"
+        android:id="@+id/DishName1"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:text="@string/my_dish_name"
         android:gravity="center"
         android:textColor="#000"
-        android:layout_toRightOf="@+id/myDish1"
+        android:layout_toRightOf="@+id/imageView1"
         android:layout_marginTop="44dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+    </TextView>
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="0dp"
+        android:src="@drawable/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/DishName2"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:text="@string/my_dish_name"
+        android:gravity="center"
+        android:textColor="#000"
+        android:layout_toRightOf="@+id/imageView2"
+        android:layout_marginTop="244dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+    </TextView>
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="0dp"
+        android:src="@drawable/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/DishName3"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:text="@string/my_dish_name"
+        android:gravity="center"
+        android:textColor="#000"
+        android:layout_toRightOf="@+id/imageView3"
+        android:layout_marginTop="444dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+    </TextView>
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginLeft="0dp"
+        android:src="@drawable/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/DishName4"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:text="@string/my_dish_name"
+        android:gravity="center"
+        android:textColor="#000"
+        android:layout_toRightOf="@+id/imageView4"
+        android:layout_marginTop="644dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
     </TextView>

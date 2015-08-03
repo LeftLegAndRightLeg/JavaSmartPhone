@@ -19,7 +19,7 @@ public interface RecipeService {
     @GET("/recipe/dishid/{dishid}")
     void getRecipeByDishID(@Path("dishid")String dishID, RecipePO cb);
     @GET("/recipe/categoryid/{CategoryID}")
-    void getRecipesByCategoryID(@Path("CategoryID")String CategoryID, List<RecipePO> cb);
+    void getRecipesByCategoryID(@Path("CategoryID")String CategoryID, Callback<List<RecipePO>> cb);
     @GET("/recipe/userid/{userID}")
     void getRecipesByUserID(@Path("userID")String userID, Callback<List<RecipePO>> cb);
 }

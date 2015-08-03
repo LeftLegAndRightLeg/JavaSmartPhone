@@ -16,25 +16,17 @@ public abstract class proxyUserEditor {
         editusrtb.updateRecord(name, newpw);
     }
 
-    public User createUser(String name, String pw, String ip) {
-        // TODO Auto-generated method stub
-        return new User(name, pw, ip);
-    }
+    public void createUser(String name, String pw) {
 
-    public boolean checkusername() {
-        // TODO Auto-generated method stub
-        return false;
     }
+    public void checkUser(String userName, String passWord){
 
-    public boolean checkpassword() {
-        // TODO Auto-generated method stub
-        return false;
     }
 
     //EditUserDB
     public void saveUsertoDataBase(User user, Context context){
         editusrtb = new EditUserTable(context);
-        editusrtb.insertRecord(user.getUserName(), user.getPassWord(),user.getIP());
+        editusrtb.insertRecord(user.getUserName(), user.getPassWord(), user.getIP());
     }
 
     public Cursor getUserfromDB(String name, Context context){
@@ -46,4 +38,6 @@ public abstract class proxyUserEditor {
     public void closeDB(){
         editusrtb.close();
     }
+
+
 }
