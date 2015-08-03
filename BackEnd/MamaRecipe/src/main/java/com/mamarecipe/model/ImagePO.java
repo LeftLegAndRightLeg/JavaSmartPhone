@@ -7,7 +7,7 @@ import com.google.gson.Gson;
  */
 public class ImagePO {
     private long imageID;
-    private String ImageURI;
+    private String imageURI;
     private long dishID;
 
     public long getImageID() {
@@ -19,11 +19,11 @@ public class ImagePO {
     }
 
     public String getImageURI() {
-        return ImageURI;
+        return imageURI;
     }
 
     public void setImageURI(String imageURI) {
-        ImageURI = imageURI;
+        this.imageURI = imageURI;
     }
 
     public long getDishID() {
