@@ -115,7 +115,7 @@ public class RecipeDBA implements IRecipeDBA {
             PreparedStatement stmt = conn.prepareStatement(SQL.QUERY_RECIPE_BY_USERID)){
             stmt.setLong(1, userID);
             try(ResultSet rs = stmt.executeQuery()){
-                List<RecipePO> rpoList = new LinkedList<>();
+                List<RecipePO> rpoList = new LinkedList<RecipePO>();
                 final int limit = 6;
                 while(rs.next() && rpoList.size()<limit){
                     RecipePO rpo = new RecipePO();
