@@ -1,0 +1,198 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="src.mamasrecipe.ShowDishActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/showDishPhoto"
+            android:src="@drawable/message_unselected"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/showDishName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_dish_name"
+            android:gravity="center"
+            android:layout_weight="2"
+            android:textColor="#000"
+            android:textSize="36sp"
+            android:layout_alignTop="@+id/showDishPhoto">
+        </TextView>
+
+        <TextView
+            android:id="@+id/showAuthorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_author_name"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="#000"
+            android:textSize="36sp"
+            android:layout_toRightOf="@+id/showDishName">
+        </TextView>
+
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="450dp"
+            android:id="@+id/statTableLayout"
+            android:background="#FFF"
+            android:padding="5dp">
+
+            <!-- tableRow0 -->
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/statTableRow0">
+
+
+                <TextView
+                    android:id="@+id/title0TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:textSize = "20sp"
+                    android:text="Ingredient"
+                    android:gravity="center"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:textColor="#000">
+                </TextView>
+                <TextView android:id="@+id/title1TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:textSize = "20sp"
+                    android:text="Quantity"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textStyle="bold"/>
+            </TableRow>
+
+            <!-- tableRow1 -->
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/statTableRow1">
+
+
+                <TextView
+                    android:id="@+id/first0TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:textSize = "20sp"
+                    android:text="First"
+                    android:gravity="center"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:textColor="#000">
+                </TextView>
+                <TextView android:id="@+id/first1TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:textSize = "20sp"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+            </TableRow>
+
+            <!-- tableRow2 -->
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/statTableRow2">
+
+
+                <TextView
+                    android:id="@+id/sencond0TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:textSize = "20sp"
+                    android:text="Second"
+                    android:gravity="center"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:textColor="#000">
+                </TextView>
+                <TextView android:id="@+id/second1TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:textSize = "20sp"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+            </TableRow>
+
+            <!-- tableRow3 -->
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/statTableRow3">
+
+                <TextView
+                    android:id="@+id/third0TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:textSize = "20sp"
+                    android:text="Third"
+                    android:gravity="center"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:textColor="#000">
+                </TextView>
+                <TextView android:id="@+id/third1TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:textSize = "20sp"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
+            </TableRow>
+        </TableLayout>
+        <TextView android:id="@+id/direction1TextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize = "30sp"
+            android:layout_span="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Direction1 Here"/>
+        <TextView android:id="@+id/direction2TextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize = "30sp"
+            android:layout_span="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Direction2 Here"/>
+        <TextView android:id="@+id/direction3TextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize = "30sp"
+            android:layout_span="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Direction3 Here"/>
+        <TextView android:id="@+id/direction4TextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize = "30sp"
+            android:layout_span="1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Direction4 Here"/>
+    </LinearLayout>
+
+</ScrollView>
