@@ -1,49 +1,74 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
+    tools:context="src.mamasrecipe.RecipeFragment">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:weightSum="1">
+    <ImageView
+        android:id="@+id/recipeimageView1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        android:src="@drawable/ic_launcher"/>
 
-        <ListView
-            android:layout_width="138dp"
-            android:layout_height="fill_parent"
-            android:id="@+id/listView"
-            android:layout_gravity="center_vertical"
-            android:entries="@array/category"/>
+    <TextView
+        android:id="@+id/recipeDishName1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MainDish"
+        android:gravity="center"
+        android:textColor="#000"
+        android:layout_toRightOf="@+id/recipeimageView1"
+        android:layout_marginTop="44dp"
+        android:textSize="55sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+    </TextView>
+    <ImageView
+        android:id="@+id/recipeimageView2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="0dp"
+        android:src="@drawable/ic_launcher"/>
 
+    <TextView
+        android:id="@+id/recipeDishName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salad"
+        android:textSize="55sp"
+        android:gravity="center"
+        android:textColor="#000"
+        android:layout_toRightOf="@+id/recipeimageView2"
+        android:layout_marginTop="244dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+    </TextView>
+    <ImageView
+        android:id="@+id/recipeimageView3"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="0dp"
+        android:src="@drawable/ic_launcher"/>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:weightSum="1">
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/testImageView"
-                android:scaleType="fitCenter"
-                android:minHeight="@android:dimen/thumbnail_height"
-                android:src="@drawable/ic_launcher"/>
+    <TextView
+        android:id="@+id/recipeDishName3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dessert"
+        android:textSize="55sp"
+        android:gravity="center"
+        android:textColor="#000"
+        android:layout_toRightOf="@+id/recipeimageView3"
+        android:layout_marginTop="444dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+    </TextView>
 
-            <!--<ImageView-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/imageView"-->
-
-                <!--android:src="@drawable/chinesefood"-->
-                <!--android:contentDescription="demo"-->
-                <!--android:scaleType="fitCenter"-->
-                <!--android:minHeight="@android:dimen/thumbnail_height" />-->
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

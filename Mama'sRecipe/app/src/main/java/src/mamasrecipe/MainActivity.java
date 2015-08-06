@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private View meLayout;
     private FragmentManager fragmentManager;
 
+    private String mainUserID;
+    private String mainUserName;
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
      * 在这里获取到每个需要用到的控件的实例，并给它们设置好必要的点击事件。
      */
     private void initViews() {
+        Intent intent = getIntent();
+        mainUserID = intent.getStringExtra("userID");
+        mainUserName = intent.getStringExtra("userName");
+        System.out.println("MAIN ACTTIVITY recieve userID:  "  + mainUserID);
         recipeLayout = findViewById(R.id.recipe_layout);
         newLayout = findViewById(R.id.new_layout);
         meLayout = findViewById(R.id.me_layout);
@@ -98,6 +106,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 if (newFragment == null) {
                     // 如果ContactsFragment为空，则创建一个并添加到界面上
                     newFragment = new NewFragment();
+                    Bundle data = new Bundle();
+                    data.putString("userID", mainUserID);
+                    data.putString("userName", mainUserName);
+                    newFragment.setArguments(data);
                     transaction.add(R.id.content, newFragment);
                 } else {
                     // 如果ContactsFragment不为空，则直接将它显示出来
@@ -108,6 +120,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 if (meFragment == null) {
                     // 如果NewsFragment为空，则创建一个并添加到界面上
                     meFragment = new MeFragment();
+                    Bundle data = new Bundle();
+                    data.putString("userID", mainUserID);
+                    data.putString("userName", mainUserName);
+                    meFragment.setArguments(data);
                     transaction.add(R.id.content, meFragment);
                 } else {
                     // 如果NewsFragment不为空，则直接将它显示出来

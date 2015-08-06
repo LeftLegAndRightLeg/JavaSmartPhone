@@ -2,131 +2,210 @@ package src.mamasrecipe;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.List;
+
+import app.App;
+import model.po.ImagePO;
+import model.po.RecipePO;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import src.mamasrecipe.R;
 
-//package src.mamasrecipe;
-//
-//import android.app.Activity;
-//import android.net.Uri;
-//import android.os.Bundle;
-//import android.support.v4.app.Fragment;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//
-//
-///**
-// * A simple {@link Fragment} subclass.
-// * Activities that contain this fragment must implement the
-// * {@link RecipeFragment.OnFragmentInteractionListener} interface
-// * to handle interaction events.
-// * Use the {@link RecipeFragment#newInstance} factory method to
-// * create an instance of this fragment.
-// */
-//public class RecipeFragment extends Fragment {
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
-//
-//    private OnFragmentInteractionListener mListener;
-//
-//    /**
-//     * Use this factory method to create a new instance of
-//     * this fragment using the provided parameters.
-//     *
-//     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
-//     * @return A new instance of fragment RecipeFragment.
-//     */
-//    // TODO: Rename and change types and number of parameters
-//    public static RecipeFragment newInstance(String param1, String param2) {
-//        RecipeFragment fragment = new RecipeFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-//
-//    public RecipeFragment() {
-//        // Required empty public constructor
-//    }
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//    }
-//
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View meLayout = inflater.inflate(R.layout.fragment_me,
-//                container, false);
-//        return meLayout;
-//    }
-//
-//    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-//
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        try {
-//            mListener = (OnFragmentInteractionListener) activity;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-//
-//    /**
-//     * This interface must be implemented by activities that contain this
-//     * fragment to allow an interaction in this fragment to be communicated
-//     * to the activity and potentially other fragments contained in that
-//     * activity.
-//     * <p/>
-//     * See the Android Training lesson <a href=
-//     * "http://developer.android.com/training/basics/fragments/communicating.html"
-//     * >Communicating with Other Fragments</a> for more information.
-//     */
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        public void onFragmentInteraction(Uri uri);
-//    }
-//
-//}
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class RecipeFragment extends Fragment {
+
+    private ImageView recipeimageView1;
+    private ImageView recipeimageView2;
+    private ImageView recipeimageView3;
+
+    private Bitmap bitmap1;
+    private Bitmap bitmap2;
+    private Bitmap bitmap3;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View recipeLayout = inflater.inflate(R.layout.fragment_recipe, container, false);
+        recipeLayout.getBackground().setAlpha(100);
+        getReference(recipeLayout);
+        imageSetterByCategoryID();
+        clickListener();
         return recipeLayout;
     }
+
+    private void getReference(View view){
+        recipeimageView1 = (ImageView) view.findViewById(R.id.recipeimageView1);
+        recipeimageView2 = (ImageView) view.findViewById(R.id.recipeimageView2);
+        recipeimageView3 = (ImageView) view.findViewById(R.id.recipeimageView3);
+
+    }
+    private void clickListener(){
+        recipeimageView1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent submit = new Intent(getActivity(), MyDishActivity.class);
+                submit.putExtra("categoryID", "1"); // Add dishID later here !
+                submit.putExtra("userID", "");
+                startActivity(submit);
+            }
+        });
+        recipeimageView2.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent submit = new Intent(getActivity(), MyDishActivity.class);
+                submit.putExtra("categoryID", "2"); // Add dishID later here !
+                submit.putExtra("userID", "");
+                startActivity(submit);
+            }
+        });
+        recipeimageView3.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent submit = new Intent(getActivity(), MyDishActivity.class);
+                submit.putExtra("categoryID", "3"); // Add dishID later here !
+                submit.putExtra("userID", "");
+                startActivity(submit);
+            }
+        });
+    }
+    private void imageSetterByCategoryID(){
+
+        App.getRestClient().getRecipeService().getRecipesByCategoryID("1", new Callback<List<RecipePO>>() {
+            @Override
+            public void success(List<RecipePO> recipePOs, Response response) {
+                long currentDishID = recipePOs.get(recipePOs.size()-4).getDishID();
+                App.getRestClient().getPhotoService().getImageByDishID(String.valueOf(currentDishID), new Callback<ImagePO>() {
+                    @Override
+                    public void success(ImagePO imagePO, Response response) {
+                        imageThread thread = new  imageThread("http://" + imagePO.getImageURI(), 1);
+                        thread.start();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+        App.getRestClient().getRecipeService().getRecipesByCategoryID("2", new Callback<List<RecipePO>>() {
+            @Override
+            public void success(List<RecipePO> recipePOs, Response response) {
+                long currentDishID = recipePOs.get(recipePOs.size()-6).getDishID();
+                App.getRestClient().getPhotoService().getImageByDishID(String.valueOf(currentDishID), new Callback<ImagePO>() {
+                    @Override
+                    public void success(ImagePO imagePO, Response response) {
+                        imageThread thread = new  imageThread("http://" + imagePO.getImageURI(), 2);
+                        thread.start();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+        App.getRestClient().getRecipeService().getRecipesByCategoryID("3", new Callback<List<RecipePO>>() {
+            @Override
+            public void success(List<RecipePO> recipePOs, Response response) {
+                long currentDishID = recipePOs.get(recipePOs.size()-6).getDishID();
+                App.getRestClient().getPhotoService().getImageByDishID(String.valueOf(currentDishID), new Callback<ImagePO>() {
+                    @Override
+                    public void success(ImagePO imagePO, Response response) {
+                        imageThread thread = new  imageThread("http://" + imagePO.getImageURI(), 3);
+                        thread.start();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+    private class imageThread extends Thread{
+        private String imageUrl;
+        private int index;
+
+        private imageThread(String imageUrl, int index){
+            this.imageUrl = imageUrl;
+            this.index = index;
+        }
+        @Override
+        public void run() {
+            try {
+                URL url = new URL(imageUrl);
+                InputStream is = url.openStream();
+                switch (index){
+                    case 1:
+                        bitmap1 = BitmapFactory.decodeStream(is);
+                        break;
+                    case 2:
+                        bitmap2 = BitmapFactory.decodeStream(is);
+                        break;
+                    case 3:
+                        bitmap3 = BitmapFactory.decodeStream(is);
+                        break;
+                    default:
+                        break;
+                }
+
+                handler.sendEmptyMessage(index);
+                is.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg){
+            if (msg.what == 0x1){
+                recipeimageView1.setImageBitmap(bitmap1);
+            }
+            if (msg.what == 0x2){
+                recipeimageView2.setImageBitmap(bitmap2);
+            }
+            if (msg.what == 0x3){
+                recipeimageView3.setImageBitmap(bitmap3);
+            }
+            else{
+                // Write Exception here !
+            }
+        }
+
+    };
+
+
 
 }

@@ -23,10 +23,9 @@ import model.po.RecipePO;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-
 public class MyDishActivity extends ActionBarActivity {
-    public String categoryID = "0";
-    public String userID = "0";
+    public String myDishCategoryID = new String();
+    public String myDishUserID = new String();
     private Bitmap bitmap1;
     private Bitmap bitmap2;
     private Bitmap bitmap3;
@@ -42,18 +41,34 @@ public class MyDishActivity extends ActionBarActivity {
     private TextView dishName3;
     private TextView dishName4;
 
+    private long dishID1;
+    private long dishID2;
+    private long dishID3;
+    private long dishID4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_dish);
+        View v = findViewById(R.id.mydish);
+        v.getBackground().setAlpha(100);
         getReferece();
-        imageSetterByCategoryID();
+        if(myDishCategoryID.isEmpty()){
+            imageSetterByUserID();
+        }
+        else {
+            imageSetterByCategoryID();
+        }
         clickListener();
 
 
     }
 
     private void getReferece(){
+        Intent intent = getIntent();
+        myDishUserID = intent.getStringExtra("userID");
+        myDishCategoryID = intent.getStringExtra("categoryID");
+
         imageView1 = (ImageView) findViewById(R.id.imageView1);
         imageView2 = (ImageView) findViewById(R.id.imageView2);
         imageView3 = (ImageView) findViewById(R.id.imageView3);
@@ -69,40 +84,124 @@ public class MyDishActivity extends ActionBarActivity {
         imageView1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent submit = new Intent(MyDishActivity.this, ShowDishActivity.class);
-                submit.putExtra("dishID", "2"); // Add dishID later here !
+                submit.putExtra("dishID", String.valueOf(dishID1)); // Add dishID later here !
                 startActivity(submit);
             }
         });
         imageView2.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent submit = new Intent(MyDishActivity.this, ShowDishActivity.class);
-                submit.putExtra("dishID", "2"); // Add dishID later here !
+                submit.putExtra("dishID", String.valueOf(dishID2)); // Add dishID later here !
                 startActivity(submit);
             }
         });
         imageView3.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent submit = new Intent(MyDishActivity.this, ShowDishActivity.class);
-                submit.putExtra("dishID", "2"); // Add dishID later here !
+                submit.putExtra("dishID", String.valueOf(dishID3)); // Add dishID later here !
                 startActivity(submit);
             }
         });
         imageView4.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent submit = new Intent(MyDishActivity.this, ShowDishActivity.class);
-                submit.putExtra("dishID", "2"); // Add dishID later here !
+                submit.putExtra("dishID", String.valueOf(dishID4)); // Add dishID later here !
                 startActivity(submit);
             }
         });
     }
-    private void imageSetterByCategoryID(){
-        App.getRestClient().getRecipeService().getRecipesByCategoryID(categoryID, new Callback<List<RecipePO>>() {
+    private void imageSetterByUserID(){
+        App.getRestClient().getRecipeService().getRecipesByUserID(myDishUserID, new Callback<List<RecipePO>>() {
             @Override
-            public void success(List<RecipePO> recipePOs, Response response) {
-                dishName1.setText("MA LA JI SI");
-                App.getRestClient().getPhotoService().getImageByDishID("2", new Callback<ImagePO>() {
+            public void success(final List<RecipePO> recipePOs, Response response) {
+                int index = recipePOs.size();
+                dishName1.setText(recipePOs.get(index-4).getDishName());
+                dishName2.setText(recipePOs.get(index-3).getDishName());
+                dishName3.setText(recipePOs.get(index-2).getDishName());
+                dishName4.setText(recipePOs.get(index-1).getDishName());
+                System.out.println("--------*********" + recipePOs.get(index-4).getDishName());
+                System.out.println("--------*********" + recipePOs.get(index-3).getDishName());
+                System.out.println("--------*********" + recipePOs.get(index-2).getDishName());
+                System.out.println("--------*********" + recipePOs.get(index-1).getDishName());
+                App.getRestClient().getPhotoService().getImageByDishID(String.valueOf(recipePOs.get(index - 4).getDishID()), new Callback<ImagePO>() {
                     @Override
                     public void success(ImagePO imagePO, Response response) {
+                        dishID1 = imagePO.getDishID();
+                        imageThread thread = new imageThread("http://" + imagePO.getImageURI(), 1);
+                        thread.start();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                });
+                App.getRestClient().getPhotoService().getImageByDishID(String.valueOf(recipePOs.get(index-3).getDishID()), new Callback<ImagePO>() {
+                    @Override
+                    public void success(ImagePO imagePO, Response response) {
+                        dishID2 = imagePO.getDishID();
+
+                        imageThread thread = new imageThread("http://" + imagePO.getImageURI(), 2);
+                        thread.start();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                });
+                App.getRestClient().getPhotoService().getImageByDishID(String.valueOf(recipePOs.get(index-2).getDishID()), new Callback<ImagePO>() {
+                    @Override
+                    public void success(ImagePO imagePO, Response response) {
+                        dishID3 = imagePO.getDishID();
+
+                        imageThread thread = new imageThread("http://" + imagePO.getImageURI(), 3);
+                        thread.start();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                });
+                App.getRestClient().getPhotoService().getImageByDishID(String.valueOf(recipePOs.get(index-1).getDishID()), new Callback<ImagePO>() {
+                    @Override
+                    public void success(ImagePO imagePO, Response response) {
+                        dishID4 = imagePO.getDishID();
+
+                        imageThread thread = new imageThread("http://" + imagePO.getImageURI(), 4);
+                        thread.start();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+    private void imageSetterByCategoryID(){
+        App.getRestClient().getRecipeService().getRecipesByCategoryID(myDishCategoryID, new Callback<List<RecipePO>>() {
+
+            @Override
+            public void success(List<RecipePO> recipePOs, Response response) {
+                int index = recipePOs.size();
+                dishName1.setText(recipePOs.get(index-4).getDishName());
+                dishName2.setText(recipePOs.get(index-3).getDishName());
+                dishName3.setText(recipePOs.get(index-2).getDishName());
+                dishName4.setText(recipePOs.get(index-1).getDishName());
+                App.getRestClient().getPhotoService().getImageByDishID(String.valueOf(recipePOs.get(index-4).getDishID()), new Callback<ImagePO>() {
+
+                    @Override
+                    public void success(ImagePO imagePO, Response response) {
+                        dishID1 = imagePO.getDishID();
                         imageThread thread = new  imageThread("http://" + imagePO.getImageURI(), 1);
                         thread.start();
                     }
@@ -111,9 +210,10 @@ public class MyDishActivity extends ActionBarActivity {
 
                     }
                 });
-                App.getRestClient().getPhotoService().getImageByDishID("2", new Callback<ImagePO>() {
+                App.getRestClient().getPhotoService().getImageByDishID(String.valueOf(recipePOs.get(index-3).getDishID()), new Callback<ImagePO>() {
                     @Override
                     public void success(ImagePO imagePO, Response response) {
+                        dishID2 = imagePO.getDishID();
                         imageThread thread = new  imageThread("http://" + imagePO.getImageURI(), 2);
                         thread.start();
                     }
@@ -122,9 +222,10 @@ public class MyDishActivity extends ActionBarActivity {
 
                     }
                 });
-                App.getRestClient().getPhotoService().getImageByDishID("2", new Callback<ImagePO>() {
+                App.getRestClient().getPhotoService().getImageByDishID(String.valueOf(recipePOs.get(index-2).getDishID()), new Callback<ImagePO>() {
                     @Override
                     public void success(ImagePO imagePO, Response response) {
+                        dishID3 = imagePO.getDishID();
                         imageThread thread = new  imageThread("http://" + imagePO.getImageURI(), 3);
                         thread.start();
                     }
@@ -133,9 +234,10 @@ public class MyDishActivity extends ActionBarActivity {
 
                     }
                 });
-                App.getRestClient().getPhotoService().getImageByDishID("2", new Callback<ImagePO>() {
+                App.getRestClient().getPhotoService().getImageByDishID(String.valueOf(recipePOs.get(index-1).getDishID()), new Callback<ImagePO>() {
                     @Override
                     public void success(ImagePO imagePO, Response response) {
+                        dishID4 = imagePO.getDishID();
                         imageThread thread = new  imageThread("http://" + imagePO.getImageURI(), 4);
                         thread.start();
                     }

@@ -2,6 +2,7 @@ package src.mamasrecipe;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,138 +10,62 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import app.App;
+import model.po.RecipePO;
 import model.po.UserPO;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import src.mamasrecipe.R;
 
-//package src.mamasrecipe;
-//
-//import android.app.Activity;
-//import android.net.Uri;
-//import android.os.Bundle;
-//import android.support.v4.app.Fragment;
-//import android.view.LayoutInflater;
-//import android.view.View;
-//import android.view.ViewGroup;
-//
-//
-///**
-// * A simple {@link Fragment} subclass.
-// * Activities that contain this fragment must implement the
-// * {@link MeFragment.OnFragmentInteractionListener} interface
-// * to handle interaction events.
-// * Use the {@link MeFragment#newInstance} factory method to
-// * create an instance of this fragment.
-// */
-//public class MeFragment extends Fragment {
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
-//
-//    private OnFragmentInteractionListener mListener;
-//
-//    /**
-//     * Use this factory method to create a new instance of
-//     * this fragment using the provided parameters.
-//     *
-//     * @param param1 Parameter 1.
-//     * @param param2 Parameter 2.
-//     * @return A new instance of fragment MeFragment.
-//     */
-//    // TODO: Rename and change types and number of parameters
-//    public static MeFragment newInstance(String param1, String param2) {
-//        MeFragment fragment = new MeFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-//
-//    public MeFragment() {
-//        // Required empty public constructor
-//    }
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//    }
-//
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View meLayout = inflater.inflate(R.layout.fragment_me,
-//                container, false);
-//        return meLayout;
-//    }
-//
-//    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-//
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        try {
-//            mListener = (OnFragmentInteractionListener) activity;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-//
-//    /**
-//     * This interface must be implemented by activities that contain this
-//     * fragment to allow an interaction in this fragment to be communicated
-//     * to the activity and potentially other fragments contained in that
-//     * activity.
-//     * <p/>
-//     * See the Android Training lesson <a href=
-//     * "http://developer.android.com/training/basics/fragments/communicating.html"
-//     * >Communicating with Other Fragments</a> for more information.
-//     */
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        public void onFragmentInteraction(Uri uri);
-//    }
-//
-//}
+
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MeFragment extends Fragment {
+    private String meUserID;
+    private String meUserName;
+
+    private TextView meUserNameEditText;
+    private TextView meShowRecipeNumber;
+
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View meLayout = inflater.inflate(R.layout.fragment_me, container, false);
-        UserPO upo = new UserPO();
-        upo.setUserName("test");
-        upo.setUserPass("testpass");
-        App.getRestClient().getUserService().login(upo, new Callback<UserPO>() {
+        meLayout.getBackground().setAlpha(100);
+        getReference(meLayout);
+
+        meShowRecipeNumber.setOnClickListener(new View.OnClickListener(){
+
             @Override
-            public void success(UserPO userPO, Response response) {
-                TextView tv = (TextView) getActivity().findViewById(R.id.userName);
-                tv.setText(userPO.getUserID() + userPO.getUserName() + userPO.getUserPass());
-                tv.invalidate();
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MyDishActivity.class);
+                intent.putExtra("userID", meUserID);
+                intent.putExtra("categoryID", "");
+                startActivity(intent);
+            }
+        });
+
+
+        return meLayout;
+    }
+
+
+    private void getReference(View view){
+        Bundle data = getArguments();
+        meUserID = data.getString("userID");
+        meUserName = data.getString("userName");
+
+        meUserNameEditText = (TextView) view.findViewById(R.id.meUserNameEditText);
+        meShowRecipeNumber = (TextView) view.findViewById(R.id.meShowRecipeNumber);
+        App.getRestClient().getRecipeService().getRecipesByUserID(meUserID, new Callback<List<RecipePO>>() {
+            @Override
+            public void success(List<RecipePO> recipePOs, Response response) {
+                Integer size = recipePOs.size();
+                meShowRecipeNumber.setText(size.toString());
+                meUserNameEditText.setText(meUserName);
             }
 
             @Override
@@ -148,7 +73,7 @@ public class MeFragment extends Fragment {
 
             }
         });
-        return meLayout;
+
     }
 
 }

@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,13 +29,13 @@ import retrofit.client.Response;
 
 public class ShowDishActivity extends ActionBarActivity {
 
-    private String dishID;
+    private String showDishID;
+    private String showUserID;
     private Bitmap bitmap;
 
     private ImageView showDishPhoto;
 
     private TextView showDishName;
-    private TextView showAuthorName;
 
     private TextView first0TextView;
     private TextView first1TextView;
@@ -54,19 +55,23 @@ public class ShowDishActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_dish);
+        View v = findViewById(R.id.showdish);
+        v.getBackground().setAlpha(100);
         getReference();
         layoutSetterByDishID();
     }
 
     private void getReference(){
         Intent intent = getIntent();
-        dishID = intent.getStringExtra("dishID");
-        System.out.println("----------      " + dishID + "      --------------");
+        showUserID = intent.getStringExtra("userID");
+        showDishID = intent.getStringExtra("dishID");
+
+        System.out.println(" ------@@@@@----- UserID:  " + showUserID);
+        System.out.println(" ------@@@@@----- DishID:  " + showDishID);
+
         showDishPhoto = (ImageView) findViewById(R.id.showDishPhoto);
 
         showDishName = (TextView) findViewById(R.id.showDishName);
-        showAuthorName = (TextView) findViewById(R.id.showAuthorName);
-
         first0TextView = (TextView) findViewById(R.id.first0TextView);
         first1TextView = (TextView) findViewById(R.id.first1TextView);
 
@@ -82,9 +87,24 @@ public class ShowDishActivity extends ActionBarActivity {
         direction4TextView = (TextView) findViewById(R.id.direction4TextView);
     }
     private void layoutSetterByDishID(){
-        App.getRestClient().getPhotoService().getImageByDishID(dishID, new Callback<ImagePO>() {
+        App.getRestClient().getRecipeService().getRecipeByDishID(showDishID, new Callback<RecipePO>() {
+            @Override
+            public void success(RecipePO recipePO, Response response) {
+                showDishName.setText(recipePO.getDishName());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+
+        App.getRestClient().getPhotoService().getImageByDishID(showDishID, new Callback<ImagePO>() {
             @Override
             public void success(ImagePO imagePO, Response response) {
+                System.out.println("-----------!!!!!!! Recieved Dish ID" + showDishID);
+                System.out.println("-----------!!!!!!! Recieved " + imagePO.getDishID());
+
                 imageThread thread = new  imageThread("http://" + imagePO.getImageURI());
                 thread.start();
             }
@@ -93,10 +113,20 @@ public class ShowDishActivity extends ActionBarActivity {
 
             }
         });
-        App.getRestClient().getIngredientService().getIngreByDishID(dishID, new Callback<List<IngredientPO>>() {
+        App.getRestClient().getIngredientService().getIngreByDishID(showDishID, new Callback<List<IngredientPO>>() {
             @Override
             public void success(List<IngredientPO> ingredientPOs, Response response) {
-                System.out.println("----------" + ingredientPOs.toString());
+                System.out.println("-----Ingredients-----" + ingredientPOs.toString());
+                for(int i=0; i<ingredientPOs.size(); i++){
+                    System.out.println("--------Ingredients: " + i + "   " +
+                            ingredientPOs.get(i).getIngreName() + "     QTY:  " + ingredientPOs.get(i).getIngreQt());
+                }
+                first0TextView.setText(ingredientPOs.get(0).getIngreName());
+                first1TextView.setText(ingredientPOs.get(0).getIngreQt());
+                second0TextView.setText(ingredientPOs.get(1).getIngreName());
+                second1TextView.setText(ingredientPOs.get(1).getIngreQt());
+                third0TextView.setText(ingredientPOs.get(2).getIngreName());
+                third1TextView.setText(ingredientPOs.get(2).getIngreQt());
             }
 
             @Override
@@ -104,10 +134,17 @@ public class ShowDishActivity extends ActionBarActivity {
 
             }
         });
-        App.getRestClient().getDirectionService().getDirectByDishID(dishID, new Callback<List<DirectionPO>>() {
+        App.getRestClient().getDirectionService().getDirectByDishID(showDishID, new Callback<List<DirectionPO>>() {
             @Override
             public void success(List<DirectionPO> directionPOs, Response response) {
-                System.out.println("----------" + directionPOs.toString());
+                System.out.println("----Directions------" + directionPOs.toString());
+                for(int i=0; i<directionPOs.size(); i++){
+                    System.out.println("-------------Direction:  " + i + "    " + directionPOs.get(i).getDirectionName());
+                }
+                direction1TextView.setText(directionPOs.get(0).getDirectionName());
+                direction2TextView.setText(directionPOs.get(1).getDirectionName());
+                direction3TextView.setText(directionPOs.get(2).getDirectionName());
+                direction4TextView.setText(directionPOs.get(3).getDirectionName());
             }
 
             @Override
@@ -115,6 +152,8 @@ public class ShowDishActivity extends ActionBarActivity {
 
             }
         });
+
+
     }
 
     private class imageThread extends Thread{
