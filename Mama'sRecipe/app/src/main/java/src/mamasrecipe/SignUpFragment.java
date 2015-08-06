@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import app.App;
 import model.po.UserPO;
@@ -31,6 +32,7 @@ public class SignUpFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        view.getBackground().setAlpha(100);
         getReference(view);
 
         SignUpSubmitButton.setOnClickListener(new View.OnClickListener() {
@@ -43,14 +45,16 @@ public class SignUpFragment extends Fragment {
                     @Override
                     public void success(UserPO userPO, Response response) {
                         Intent submit = new Intent(getActivity(), MainActivity.class);
+                        submit.putExtra("userID", String.valueOf(userPO.getUserID()));
+                        submit.putExtra("userName", userName);
                         startActivity(submit);
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
-                        System.out.println("----------- Sign Up Failure ----------");
-                        Intent submit = new Intent(getActivity(), MainActivity.class);
-                        startActivity(submit);
+                        Toast.makeText(getActivity().getBaseContext(), "Please Check Your UserName and PassWord",
+                                Toast.LENGTH_LONG).show();
+
                     }
                 });
             }
@@ -67,5 +71,10 @@ public class SignUpFragment extends Fragment {
     public void getInputs(){
         userName = accountSignUpEditText.getText().toString();
         passWord = pwSignUpEditText.getText().toString();
+        if(userName == "" || passWord == ""){
+            Toast.makeText(getActivity().getBaseContext(),"Please Check Your UserName and PassWord",
+                    Toast.LENGTH_LONG).show();
+
+        }
     }
 }

@@ -2,6 +2,8 @@ package app;
 
 import android.app.Application;
 
+import java.util.ArrayList;
+
 import rest.RestClient;
 
 
@@ -12,7 +14,9 @@ import rest.RestClient;
 public class App extends Application
 {
     private static RestClient restClient;
-
+    public static ArrayList<String> ingredients = new ArrayList<String>();
+    public static ArrayList<String> ingredientsQty = new ArrayList<String>();
+    public static ArrayList<String> directions = new ArrayList<String>();
     @Override
     public void onCreate()
     {

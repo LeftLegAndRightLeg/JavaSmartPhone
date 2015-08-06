@@ -6,6 +6,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
     tools:context="src.mamasrecipe.loginFragment">
 
     <LinearLayout
@@ -14,7 +15,7 @@
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         >
         <!--  Account Label -->
@@ -23,17 +24,22 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="40sp"
-            android:text="UserName: "/>
+            android:textSize="30sp"
+            android:text="User Name: "
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000"
+            android:layout_marginTop="150dp" />
+
         <EditText
             android:id="@+id/accountLogInEditText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input"
             android:singleLine="true"
-            android:layout_margin="36dip"
-            android:hint="  Email Adress"
-            />
+            android:hint="  Please input user name"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true" />
         <!--  Password Label -->
 
         <TextView
@@ -41,8 +47,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="PassWord: "
-            android:textSize="40sp" />
+            android:text="Password: "
+            android:textColor="#000"
+            android:layout_marginTop="80dp"
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/pwLogInEditText"
@@ -51,8 +59,9 @@
             android:background="@drawable/input"
             android:password="true"
             android:singleLine="true"
-            android:layout_margin="36dip"
-            android:hint="  PassWord"
+            android:layout_marginTop="30dp"
+            android:textColor="#000"
+            android:hint="  Please input password"
             />
 
         <!-- Link to Registration Screen -->
@@ -62,8 +71,8 @@
 
     <Button
         android:id="@+id/logInSubmitButton"
-        android:layout_width="200dp"
-        android:layout_height="110dp"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:background="@drawable/button"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
@@ -73,7 +82,19 @@
         android:focusable="true"
         android:gravity="center"
         android:text="Submit"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:typeface="serif" />
+
+    <TextView
+        android:id="@+id/accountWelcomeTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:text="Welcome Back!"
+        android:textColor="#000"
+        android:typeface ="monospace"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="55dp" />
 
 </RelativeLayout>

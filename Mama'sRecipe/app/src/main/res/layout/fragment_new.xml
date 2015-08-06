@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:background="@drawable/background"
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical" >
@@ -14,13 +15,28 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:padding="10dp"
-            android:text="Here is the name of Recipe"
+            android:textColor="#000"
+            android:text="Please Enter Your Recipe Name:"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/recipeNameToServer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:textColor="#000"
+            android:text="Please Upload Your Recipe Photo:"
             android:textSize="20sp" />
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/photoFromServer"
-            android:src="@drawable/message_unselected"
+            android:id="@+id/photoToServer"
             android:scaleType="fitCenter"
             android:minHeight="@android:dimen/thumbnail_height" />
         <TableLayout
@@ -30,137 +46,213 @@
             android:background="#FFF"
             android:padding="5dp">
 
-        <!-- tableRow0 -->
-        <TableRow
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:id="@+id/statTableRow0">
+            <!-- tableRow0 -->
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/statTableRow0">
 
 
-            <TextView
-                android:id="@+id/title0TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize = "10sp"
-                android:text="Ingredient"
-                android:gravity="center"
-                android:layout_span="1"
-                android:layout_weight="1"
-                android:textColor="#000">
-            </TextView>
-            <TextView android:id="@+id/title1TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize = "10sp"
-                android:text="Quantity"
-                android:layout_span="1"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textStyle="bold"/>
-        </TableRow>
+                <TextView
+                    android:id="@+id/title0TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize = "20sp"
+                    android:text="Ingredient"
+                    android:gravity="center"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:textColor="#000">
+                </TextView>
+                <TextView android:id="@+id/title1TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize = "20sp"
+                    android:text="Quantity"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000" />
+            </TableRow>
 
-        <!-- tableRow1 -->
-        <TableRow
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:id="@+id/statTableRow1">
-
-
-            <TextView
-                android:id="@+id/first0TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize = "10sp"
-                android:text="First"
-                android:gravity="center"
-                android:layout_span="1"
-                android:layout_weight="1"
-                android:textColor="#000">
-            </TextView>
-            <TextView android:id="@+id/first1TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize = "10sp"
-                android:layout_span="1"
-                android:layout_weight="1"
-                android:gravity="center"/>
-        </TableRow>
-
-        <!-- tableRow2 -->
-        <TableRow
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:id="@+id/statTableRow2">
+            <!-- tableRow1 -->
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/statTableRow1">
 
 
-            <TextView
-                android:id="@+id/sencond0TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize = "10sp"
-                android:text="Second"
-                android:gravity="center"
-                android:layout_span="1"
-                android:layout_weight="1"
-                android:textColor="#000">
-            </TextView>
-            <TextView android:id="@+id/second1TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize = "10sp"
-                android:layout_span="1"
-                android:layout_weight="1"
-                android:gravity="center"/>
-        </TableRow>
+                <EditText
+                    android:id="@+id/newfirst0TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize = "20sp"
+                    android:gravity="center"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:textColor="#000">
+                </EditText>
+                <EditText android:id="@+id/newfirst1TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize = "20sp"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:textColor="#000"
+                    android:gravity="center"/>
+            </TableRow>
 
-        <!-- tableRow3 -->
-        <TableRow
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:id="@+id/statTableRow3">
+            <!-- tableRow2 -->
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/statTableRow2">
 
 
-            <TextView
-                android:id="@+id/third0TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize = "10sp"
-                android:text="Third"
-                android:gravity="center"
-                android:layout_span="1"
-                android:layout_weight="1"
-                android:textColor="#000">
-            </TextView>
-            <TextView android:id="@+id/third1TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize = "10sp"
-                android:layout_span="1"
-                android:layout_weight="1"
-                android:gravity="center"/>
-        </TableRow>
+                <EditText
+                    android:id="@+id/newsecond0TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize = "20sp"
+                    android:gravity="center"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:textColor="#000">
+                </EditText>
+                <EditText android:id="@+id/newsecond1TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize = "20sp"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:textColor="#000"
+                    android:gravity="center"/>
+            </TableRow>
+
+            <!-- tableRow3 -->
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/statTableRow3">
+
+
+                <EditText
+                    android:id="@+id/newthird0TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize = "20sp"
+                    android:gravity="center"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:textColor="#000">
+                </EditText>
+                <EditText android:id="@+id/newthird1TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize = "20sp"
+                    android:layout_span="1"
+                    android:layout_weight="1"
+                    android:textColor="#000"
+                    android:gravity="center"/>
+            </TableRow>
         </TableLayout>
-        <TextView android:id="@+id/direction0TextView"
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize = "10sp"
+            android:text="Enter Your Directions Here:"
+            android:textSize="20sp"
+            android:textColor="#000"/>
+        <EditText android:id="@+id/direction0TextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize = "20sp"
+            android:layout_span="1"
+            android:textColor="#000"
+            android:layout_weight="1"
+            android:gravity="center"/>
+        <EditText android:id="@+id/direction1TextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize = "20sp"
+            android:textColor="#000"
             android:layout_span="1"
             android:layout_weight="1"
             android:gravity="center"/>
-        <TextView android:id="@+id/direction1TextView"
+        <EditText android:id="@+id/direction2TextView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize = "10sp"
+            android:textSize = "20sp"
+            android:textColor="#000"
             android:layout_span="1"
             android:layout_weight="1"
             android:gravity="center"/>
-        <TextView android:id="@+id/direction2TextView"
+        <EditText android:id="@+id/direction3TextView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize = "10sp"
+            android:textSize = "20sp"
+            android:textColor="#000"
             android:layout_span="1"
             android:layout_weight="1"
             android:gravity="center"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true" >
+            <Button
+                android:id="@+id/newMaindishButton"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:background="@drawable/button"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="Maindish"
+                android:textSize="20sp"
+                android:typeface="serif"
+                android:layout_marginLeft="20dp"/>
+            <Button
+                android:id="@+id/newSaladButton"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:background="@drawable/button"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Salad"
+                android:textSize="20sp"
+                android:typeface="serif"
+                android:layout_marginLeft="60dp"
+                />
+            <Button
+                android:id="@+id/newDesertButton"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:background="@drawable/button"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Desert"
+                android:textSize="20sp"
+                android:typeface="serif"
+                android:layout_marginLeft="60dp"
+                />
+        </LinearLayout>
+        <Button
+            android:id="@+id/newSubmitButton"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:background="@drawable/button"
+            android:layout_marginBottom="75dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="Submit"
+            android:textSize="25sp"
+            android:typeface="serif"
+            android:layout_gravity="center_horizontal" />
+
+
     </LinearLayout>
 
-</RelativeLayout>
+
+</ScrollView>

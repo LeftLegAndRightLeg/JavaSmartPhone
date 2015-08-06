@@ -15,9 +15,9 @@ import retrofit.http.Path;
  */
 public interface RecipeService {
     @POST("/recipe/add")
-    void addRecipe(@Body RecipePO recipePO, Callback<String> cb);
+    void addRecipe(@Body RecipePO recipePO, Callback<RecipePO> cb);
     @GET("/recipe/dishid/{dishid}")
-    void getRecipeByDishID(@Path("dishid")String dishID, RecipePO cb);
+    void getRecipeByDishID(@Path("dishid")String dishID, Callback<RecipePO> cb);
     @GET("/recipe/categoryid/{CategoryID}")
     void getRecipesByCategoryID(@Path("CategoryID")String CategoryID, Callback<List<RecipePO>> cb);
     @GET("/recipe/userid/{userID}")

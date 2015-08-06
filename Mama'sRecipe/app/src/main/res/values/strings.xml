@@ -17,4 +17,5 @@
     <string name="title_activity_show_dish">ShowDish</string>
     <string name="show_dish_name">Dish Name</string>
     <string name="show_author_name">Author Name</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>
