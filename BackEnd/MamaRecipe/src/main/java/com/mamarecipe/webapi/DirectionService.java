@@ -36,9 +36,9 @@ public class DirectionService {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @Path("/dishID/{dishID}")
-    public DirectionPO getDirectByDID(@PathParam("dishID")String dishID){
+    public List<DirectionPO> getDirectByDID(@PathParam("dishID")String dishID){
         IDirectionDBA directDBA = new DirectionDBA();
-        DirectionPO direction = directDBA.getByRecipeID(Long.parseLong(dishID));
+        List<DirectionPO> direction = directDBA.getByRecipeID(Long.parseLong(dishID));
         return direction;
     }
 }

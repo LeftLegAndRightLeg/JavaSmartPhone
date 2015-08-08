@@ -20,7 +20,7 @@ public class IngredientDBA implements IIngredientDBA {
         try(Connection conn = DBUtil.getConnection();
             PreparedStatement stmt = conn.prepareStatement(SQL.INSERT_INGREDIENT)){
             stmt.setString(1, ipo.getIngreName());
-            stmt.setInt(2, ipo.getIngreQt());
+            stmt.setString(2, ipo.getIngreQt());
             stmt.setLong(3, ipo.getDishID());
             int row = stmt.executeUpdate();
             ServerTrace.log(this.getClass().toString(), "SQL", stmt.toString()+" "+row+" rows inserted.");
@@ -32,7 +32,7 @@ public class IngredientDBA implements IIngredientDBA {
         try(Connection conn = DBUtil.getConnection();
             PreparedStatement stmt = conn.prepareStatement(SQL.UPDATE_INGREDIENT)){
             stmt.setString(1, ipo.getIngreName());
-            stmt.setInt(2, ipo.getIngreQt());
+            stmt.setString(2, ipo.getIngreQt());
             stmt.setLong(3, ipo.getIngreID());
             int row = stmt.executeUpdate();
             ServerTrace.log(this.getClass().toString(), "SQL", stmt.toString()+" "+row+" rows updated.");
@@ -50,7 +50,7 @@ public class IngredientDBA implements IIngredientDBA {
                     IngredientPO ipo = new IngredientPO();
                     ipo.setIngreID(rs.getLong(1));
                     ipo.setIngreName(rs.getString(2));
-                    ipo.setIngreQt(rs.getInt(3));
+                    ipo.setIngreQt(rs.getString(3));
                     ipo.setDishID(rs.getLong(4));
                     ipoList.add(ipo);
                 }

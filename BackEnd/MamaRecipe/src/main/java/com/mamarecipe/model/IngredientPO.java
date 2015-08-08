@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class IngredientPO {
     private long ingreID;
     private String ingreName;
-    private int ingreQt;
+    private String ingreQt;
     private long dishID;
 
     public long getIngreID() {
@@ -30,11 +30,11 @@ public class IngredientPO {
         this.ingreName = ingreName;
     }
 
-    public int getIngreQt() {
+    public String getIngreQt() {
         return ingreQt;
     }
 
-    public void setIngreQt(int ingreQt) {
+    public void setIngreQt(String ingreQt) {
         this.ingreQt = ingreQt;
     }
 

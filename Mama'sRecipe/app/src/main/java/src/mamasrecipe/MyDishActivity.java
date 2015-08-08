@@ -61,8 +61,48 @@ public class MyDishActivity extends ActionBarActivity {
         }
         clickListener();
 
-
     }
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg){
+            if (msg.what == 0x1){
+                imageView1.setImageBitmap(bitmap1);
+            }
+            if (msg.what == 0x2){
+                imageView2.setImageBitmap(bitmap2);
+            }
+            if (msg.what == 0x3){
+                imageView3.setImageBitmap(bitmap3);
+            }
+            if (msg.what == 0x4){
+                imageView4.setImageBitmap(bitmap4);
+            }
+            else{
+                // Write Exception here !
+            }
+        }
+
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void getReferece(){
         Intent intent = getIntent();
