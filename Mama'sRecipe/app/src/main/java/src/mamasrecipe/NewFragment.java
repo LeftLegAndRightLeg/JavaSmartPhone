@@ -197,13 +197,13 @@ public class NewFragment extends Fragment {
 
         for(int i=0; i<4;i++){
             if(i<3){
-                if(App.ingredients.get(i)=="" || App.ingredientsQty.get(i)==""){
+                if(App.ingredients.get(i).equals("") || App.ingredientsQty.get(i).equals("")){
                     Toast.makeText(getActivity().getBaseContext(), "Please Check Your Input !",
                             Toast.LENGTH_LONG).show();
                     return;
                 }
             }
-            if(App.directions.get(i)==""){
+            if(App.directions.get(i).equals("")){
                 Toast.makeText(getActivity().getBaseContext(), "Please Check Your Input !",
                         Toast.LENGTH_LONG).show();
                 return;
@@ -312,8 +312,7 @@ public class NewFragment extends Fragment {
 
         recipeNameToServer = (EditText) view.findViewById(R.id.recipeNameToServer);
         photoToServer = (ImageView) view.findViewById(R.id.photoToServer);
-//        photoToServer.setAlpha(100);
-//
+
         newfirst0TextView = (EditText) view.findViewById(R.id.newfirst0TextView);
         newfirst1TextView = (EditText) view.findViewById(R.id.newfirst1TextView);
         newsecond0TextView = (EditText) view.findViewById(R.id.newsecond0TextView);

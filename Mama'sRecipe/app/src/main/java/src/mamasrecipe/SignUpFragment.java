@@ -44,6 +44,11 @@ public class SignUpFragment extends Fragment {
                 App.getRestClient().getUserService().signUp(upo, new Callback<UserPO>() {
                     @Override
                     public void success(UserPO userPO, Response response) {
+                        if(userPO.getUserName().equals("") || userPO.getUserPass().equals("")){
+                            Toast.makeText(getActivity().getBaseContext(),"Null UserName or PassWord" + "Please Check Your UserName and PassWord",
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         Intent submit = new Intent(getActivity(), MainActivity.class);
                         submit.putExtra("userID", String.valueOf(userPO.getUserID()));
                         submit.putExtra("userName", userName);

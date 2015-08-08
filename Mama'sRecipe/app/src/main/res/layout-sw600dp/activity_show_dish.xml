@@ -1,9 +1,11 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
+    android:id="@+id/showdish"
     tools:context="src.mamasrecipe.ShowDishActivity">
 
     <LinearLayout
@@ -32,22 +34,12 @@
             android:layout_alignTop="@+id/showDishPhoto">
         </TextView>
 
-        <TextView
-            android:id="@+id/showAuthorName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/show_author_name"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:textColor="#000"
-            android:textSize="36sp"
-            android:layout_toRightOf="@+id/showDishName">
-        </TextView>
+
 
 
         <TableLayout
             android:layout_width="fill_parent"
-            android:layout_height="450dp"
+            android:layout_height="wrap_content"
             android:id="@+id/statTableLayout"
             android:background="#FFF"
             android:padding="5dp">
@@ -62,7 +54,7 @@
                 <TextView
                     android:id="@+id/title0TextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_height="50dp"
                     android:textSize = "20sp"
                     android:text="Ingredient"
                     android:gravity="center"
@@ -72,13 +64,13 @@
                 </TextView>
                 <TextView android:id="@+id/title1TextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_height="50dp"
                     android:textSize = "20sp"
                     android:text="Quantity"
                     android:layout_span="1"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textStyle="bold"/>
+                    android:textColor="#000" />
             </TableRow>
 
             <!-- tableRow1 -->
@@ -91,7 +83,7 @@
                 <TextView
                     android:id="@+id/first0TextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_height="50dp"
                     android:textSize = "20sp"
                     android:text="First"
                     android:gravity="center"
@@ -101,10 +93,11 @@
                 </TextView>
                 <TextView android:id="@+id/first1TextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_height="50dp"
                     android:textSize = "20sp"
                     android:layout_span="1"
                     android:layout_weight="1"
+                    android:textColor="#000"
                     android:gravity="center"/>
             </TableRow>
 
@@ -116,9 +109,9 @@
 
 
                 <TextView
-                    android:id="@+id/sencond0TextView"
+                    android:id="@+id/second0TextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_height="50dp"
                     android:textSize = "20sp"
                     android:text="Second"
                     android:gravity="center"
@@ -128,10 +121,11 @@
                 </TextView>
                 <TextView android:id="@+id/second1TextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_height="50dp"
                     android:textSize = "20sp"
                     android:layout_span="1"
                     android:layout_weight="1"
+                    android:textColor="#000"
                     android:gravity="center"/>
             </TableRow>
 
@@ -144,7 +138,7 @@
                 <TextView
                     android:id="@+id/third0TextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_height="50dp"
                     android:textSize = "20sp"
                     android:text="Third"
                     android:gravity="center"
@@ -154,10 +148,11 @@
                 </TextView>
                 <TextView android:id="@+id/third1TextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_height="50dp"
                     android:textSize = "20sp"
                     android:layout_span="1"
                     android:layout_weight="1"
+                    android:textColor="#000"
                     android:gravity="center"/>
             </TableRow>
         </TableLayout>
@@ -168,6 +163,7 @@
             android:layout_span="1"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="#000"
             android:text="Direction1 Here"/>
         <TextView android:id="@+id/direction2TextView"
             android:layout_width="fill_parent"
@@ -176,6 +172,7 @@
             android:layout_span="1"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="#000"
             android:text="Direction2 Here"/>
         <TextView android:id="@+id/direction3TextView"
             android:layout_width="fill_parent"
@@ -184,6 +181,7 @@
             android:layout_span="1"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="#000"
             android:text="Direction3 Here"/>
         <TextView android:id="@+id/direction4TextView"
             android:layout_width="fill_parent"
@@ -192,7 +190,8 @@
             android:layout_span="1"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="#000"
             android:text="Direction4 Here"/>
     </LinearLayout>
 
-</ScrollView>
+</RelativeLayout>

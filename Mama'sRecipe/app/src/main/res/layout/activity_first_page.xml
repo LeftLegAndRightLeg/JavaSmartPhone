@@ -1,5 +1,4 @@
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,14 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:orientation="vertical" >
-                <TextView
-                    android:id="@+id/welcome_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Welcome"
-                    android:textSize="10sp"
-                    android:textColor="#82858b" />
+
                 <ImageView
                     android:id="@+id/welcome_image"
                     android:layout_width="wrap_content"
@@ -43,7 +35,13 @@
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/message_unselected" />
 
-
+                <TextView
+                    android:id="@+id/welcome_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Welcome"
+                    android:textColor="#82858b" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -58,14 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:orientation="vertical" >
-                <TextView
-                    android:id="@+id/login_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="10sp"
-                    android:text="Log In"
-                    android:textColor="#82858b" />
+
                 <ImageView
                     android:id="@+id/login_image"
                     android:layout_width="wrap_content"
@@ -73,7 +64,13 @@
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/contacts_unselected" />
 
-
+                <TextView
+                    android:id="@+id/login_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Log In"
+                    android:textColor="#82858b" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -88,14 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:orientation="vertical" >
-                <TextView
-                    android:id="@+id/signup_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="10sp"
-                    android:text="Sign Up"
-                    android:textColor="#82858b" />
+
                 <ImageView
                     android:id="@+id/signup_image"
                     android:layout_width="wrap_content"
@@ -103,7 +93,13 @@
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/news_unselected" />
 
-
+                <TextView
+                    android:id="@+id/signup_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Sign Up"
+                    android:textColor="#82858b" />
             </LinearLayout>
         </RelativeLayout>
 

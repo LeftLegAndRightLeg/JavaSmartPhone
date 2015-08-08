@@ -44,9 +44,15 @@ public class LogInFragment extends Fragment {
                 UserPO upo = new UserPO();
                 upo.setUserName(userName);
                 upo.setUserPass(passWord);
+
                 App.getRestClient().getUserService().login(upo, new Callback<UserPO>(){
                     @Override
                     public void success(UserPO userPO, Response response) {
+                        if(userPO.getUserName().equals("") || userPO.getUserPass().equals("")){
+                            Toast.makeText(getActivity().getBaseContext(),"Null UserName or PassWord" + "Please Check Your UserName and PassWord",
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         Intent submit = new Intent(getActivity(), MainActivity.class);
                         submit.putExtra("userID", String.valueOf(userPO.getUserID()));
                         submit.putExtra("userName", userName);
@@ -73,9 +79,5 @@ public class LogInFragment extends Fragment {
     public void getInputs(){
         userName = accountLogInEditText.getText().toString();
         passWord = pwLogInEditText.getText().toString();
-        if(userName == "" || passWord == ""){
-            Toast.makeText(getActivity().getBaseContext(), "Please Check Your UserName and PassWord",
-                    Toast.LENGTH_LONG).show();
-        }
     }
 }
